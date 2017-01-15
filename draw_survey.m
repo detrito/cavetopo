@@ -19,9 +19,10 @@ global PLOT_XY PLOT_XZ PLOT_YZ PLOT_XYZ;
     if (PLOT_XY)
         figure(1);
         hold on;
-        text(mean_x, mean_y, title);
+        lab = text(mean_x, mean_y, title);
         scatter(data_x, data_y, [], data_z, 'filled');
         plot(data_x, data_y,'k');
+                uistack(lab,'top')
         hold off;
     end
 

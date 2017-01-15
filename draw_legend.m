@@ -1,6 +1,6 @@
 function [] = draw_legend()
 
-global PLOT_XY PLOT_XZ PLOT_YZ PLOT_XYZ RELATIVE_DEPTH;
+global PLOT_XY PLOT_XZ PLOT_YZ PLOT_XYZ ENABLE_RELATIVE_DEPTH;
 
 
 %% figure legend
@@ -30,7 +30,7 @@ end
 % set(ax,'YTick',ytick);
 % set(gca, 'XTickLabel', num2str(get(gca, 'XTick')))
 
-if (RELATIVE_DEPTH)
+if (ENABLE_RELATIVE_DEPTH)
     label_z = '\Deltaz [m]';
 else
     label_z = 'z [m]';
@@ -58,6 +58,7 @@ if(PLOT_XYZ)
     figure(4);
 
     %hold on;
+    
     %surf(X,Y,dtm);
     %axis equal;
     

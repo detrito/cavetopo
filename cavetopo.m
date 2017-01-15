@@ -15,8 +15,9 @@ DTM_FILENAME = './data/mnt.tif';
 DTM_METADATA_FILENAME = './data/mnt.tfw';
 HS_FILENAME = './data/hs.tif';
 
-EXCLUDE_DEEP_SURVEYS = 0;
-RELATIVE_DEPTH = 0;
+ENABLE_EXCLUDE_DEEP_SURVEYS = 0;
+ENABLE_RELATIVE_DEPTH = 0;
+ENABLE_TEXT_LABELS = 0;
 
 DEEP_SURVEYS = [42,41,39,37,36,35,27,18,10];
 
@@ -43,7 +44,7 @@ survey_n = length(survey_i);    % number of surveys
 %dtm = trim_dtm(dtm, num);
 
 % convert absolute depth in relative depth
-if (RELATIVE_DEPTH )
+if (ENABLE_RELATIVE_DEPTH )
     num(:,5) = num(:,5)-max(num(:,5));
 end
 
@@ -62,7 +63,7 @@ end
 for i= 1:survey_n
    
    % check if this survey is member of the deep_surveys array
-   if(EXCLUDE_DEEP_SURVEYS == 1 &&  any(num(survey_i(i))  == DEEP_SURVEYS) )
+   if(ENABLE_EXCLUDE_DEEP_SURVEYS == 1 &&  any(num(survey_i(i))  == DEEP_SURVEYS) )
        % skip this iteration
        continue;
    end
@@ -79,7 +80,11 @@ for i= 1:survey_n
    
    % get survey data
    survey_data = num(survey_begin:survey_end,:);
-   survey_title = txt(survey_i(i),1);
+   if(ENABLE_TEXT_LABELS)
+       survey_title = txt(survey_i(i),1);
+   else
+       survey_title = num2str(i);
+   end
    
    % draw survey data
    draw_survey(survey_data,survey_title);
